@@ -1,0 +1,35 @@
+.plus {
+    border-radius: 5px;
+    border-width: 0.2px;
+    width: 50px;
+    height: 40px;
+}
+
+.minus {
+    border-radius: 5px;
+    border-width: 0.2px;
+    width: 50px;
+    height: 40px;
+}
+
+.qty {
+    border: .5px;
+    width: 50px;
+    height: 40px;
+}
+
+.single_add_to_cart_button {
+    margin-left: 5px;
+}
+
+.contact {
+    border-radius: 5px !important;
+    border-style: solid;
+    border-width: 0.2px;
+    padding: 10px 10px 0px 10px;
+    margin-bottom: 5px;
+}
+
+.payment {
+    list-style-type: circle;
+}

@@ -1,0 +1,188 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+    <div class="container">
+        <a class="navbar-brand d-inline-flex" [routerLink]="['/home']"><img class="d-inline-block" src="assets/img/logo.png" alt="logo" /><span class="text-1000 fs-0 fw-bold ms-2">Majestic</span
+      ></a
+    ><button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item px-2">
+                        <a class="nav-link fw-medium active" aria-current="page" [routerLink]="['/tree/all']" href="#categoryWomen">Cây cảnh</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-medium"
+            href="#header"
+            [routerLink]="['/tool/all']"
+            >Dụng cụ</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-medium"
+            href="#header"
+            [routerLink]="['/pot/all']"
+            >Chậu cây</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-medium"
+            href="#collection"
+            [routerLink]="['/post/all']"
+            >Bài viết</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-medium"
+            href="#outlet"
+            [routerLink]="['/contact']"
+            >Giới thiệu</a
+          >
+        </li>
+      </ul>
+      <form class="d-flex">
+        <a class="text-1000" (click)="openModal()">
+          <svg
+            class="feather feather-search me-3"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg
+        ></a>
+                        <a class="text-1000" [routerLink]="['/order/card']">
+                            <svg class="feather feather-shopping-cart me-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path></svg
+        ></a>
+        <a class="text-1000" [routerLink]="['/chat/message']">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope  me-3" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+          </svg></a>
+                        <a class="text-1000" [routerLink]="['/personnal/information']">
+                            <svg class="feather feather-user me-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle></svg
+        ></a>
+        <a class="text-1000" [routerLink]="['/order/history']">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-wallet2 me-3"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"
+            /></svg
+        ></a>
+        <a type="button" class="text-1000" *ngIf="isLogin" (click)="logout()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle me-3" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg></a>
+                        <a class="text-1000" *ngIf="!isLogin" [routerLink]="['/auth']">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+          <path
+              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"
+            /></svg
+        ></a>
+      </form>
+    </div>
+  </div>
+</nav>
+<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+  <div
+    class="bg-holder overlay overlay-light"
+    style="
+      background-image: url(assets/img/tree/tree-1.jpg);
+      background-size: cover;
+    "
+  ></div>
+  <!--/.bg-holder-->
+  <div class="container">
+    <div class="row flex-center">
+      <div class="col-12 mb-10"></div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cho Website -->
+<div id="myModal" class="modal">
+  <!-- Nội Dung Modal -->
+  <div class="modal-content">
+    <button
+      class="btn-close"
+      (click)="closeModal()"
+      style="display: flex; justify-content: flex-end"
+    ></button>
+    <div class="row">
+      <div class="col-9 text-center">
+        <input type="text" style="width: 100%; height: 42px" />
+      </div>
+      <div class="col-3 text-center">
+        <a
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/search/product']"
+          [queryParams]="{ name: 'new' }"
+          >Tìm</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

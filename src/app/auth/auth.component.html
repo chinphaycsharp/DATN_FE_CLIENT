@@ -1,0 +1,63 @@
+<br>
+<br>
+<div class="cont bg-holder overlay overlay-light" style="background-image: url(assets/img/tree/tree-1.jpg); background-size: cover;">
+    <div class="form sign-in">
+        <h2>Đăng nhập</h2>
+        <label>
+                <span style="color: black;">Email</span>
+                <input type="text"  placeholder="Tên đăng nhập" #username/>
+            </label>
+        <label>
+                <span style="color: black;">Password</span>
+                <input  type="password" placeholder="Mật khẩu" #password/>
+            </label>
+        <p class="forgot-pass" style="color: black;"><a [routerLink]="['/forgotPassword']">Quên mật khẩu?</a></p>
+        <button type="button" class="submit" (click)="login(username.value,password.value)">Đăng nhập</button>
+
+    </div>
+    <div class="sub-cont bg-holder overlay overlay-light" style="background-image: url(assets/img/tree/tree-11.jpg); background-size: cover;">
+        <div class="img">
+            <div class="img__text m--up">
+                <h3>Không có tài khoản, hãy đăng ký ngay !
+                </h3>
+            </div>
+            <div class="img__text m--in">
+                <h3>Nếu bạn có tài khoản, hãy đăng nhập !
+                </h3>
+            </div>
+            <div class="img__btn" (click)="changeTab()">
+                <span class="m--up">Đăng nhập</span>
+                <span class="m--in">Đăng ký</span>
+            </div>
+        </div>
+        <div class="form sign-up">
+            <h2>Tạo tài khoản</h2>
+            <label>
+              <span style="color: black;">Tên</span>
+              <input type="text" placeholder="Tên" #name/>
+          </label>
+            <label>
+                    <span style="color: black;">Tên đăng nhập</span>
+                    <input type="text" placeholder="Tên đăng nhập" #usernameregister/>
+                </label>
+            <label>
+                    <span style="color: black;">Email</span>
+                    <input type="email"  placeholder="Email" #emailregister/>
+                </label>
+            <label>
+                  <span style="color: black;">Số điện thoại</span>
+                  <input type="text"  placeholder="Số điện thoại" #phone/>
+              </label>
+            <label>
+                    <span style="color: black;">Mật khẩu</span>
+                    <input type="password"  placeholder="Mật khẩu" #passwordregister/>
+                </label>
+            <label>
+                  <span style="color: black;">Nhâp lại mật khẩu</span>
+                  <input type="password"  placeholder="Nhập lại mật khẩu" #confirmpass/>
+              </label>
+            <button type="button" class="submit" (click)="register(name.value,usernameregister.value, emailregister.value,phone.value,passwordregister.value,confirmpass.value)">Đăng ký</button>
+
+        </div>
+    </div>
+</div>
