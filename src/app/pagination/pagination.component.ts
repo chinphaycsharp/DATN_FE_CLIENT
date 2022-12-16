@@ -21,6 +21,8 @@ export class PaginationComponent implements OnInit {
   }
 // API route
 @Input() apiRoute: string = '';
+// Search term
+@Input() searchTerm: string = '';
 // Records per page
 @Input() recordsPerPage: number = 0;
 // Response data
@@ -29,7 +31,9 @@ export class PaginationComponent implements OnInit {
 @Output() loading = new EventEmitter<boolean>();
 // Reload
 @Input() reload: EventEmitter<boolean> | undefined;
-
+@Input() accessToken: string = '';
+@Input() userId : any;
+@Input() type : any;
 // On init
 ngOnInit() {
 
@@ -58,24 +62,80 @@ prev() {
 }
 
 handleHttpParams(pageNo:any): HttpParams{
-    let params = new HttpParams({
+  let params = null;
+  if(this.type == "history"){
+    params = new HttpParams({
       fromObject:{
-        type:"TREE",
-        ItemsPerPage : "8",
+        ItemsPerPage : "10",
+        user_id : this.userId,
         Page : Number(pageNo).toString()
       }
     });
-    return params;
+  }
+  if(this.type == "active"){
+    params = new HttpParams({
+      fromObject:{
+        ItemsPerPage : "10",
+        type : this.searchTerm,
+        name : this.userId,
+        Page : Number(pageNo).toString()
+      }
+    });
+  }
+  if(this.type == "tree"){
+    params = new HttpParams({
+      fromObject:{
+        ItemsPerPage : "10",
+        FilterText : "",
+        categoryId : this.userId,
+        Page : Number(pageNo).toString()
+      }
+    });
+  }
+
+  if(this.type == "tool"){
+    params = new HttpParams({
+      fromObject:{
+        ItemsPerPage : "10",
+        FilterText : "",
+        categoryId : this.userId,
+        Page : Number(pageNo).toString()
+      }
+    });
+  }
+
+  if(this.type == "pot"){
+    params = new HttpParams({
+      fromObject:{
+        ItemsPerPage : "10",
+        FilterText : "",
+        categoryId : this.userId,
+        Page : Number(pageNo).toString()
+      }
+    });
+  }
+
+  if(this.type == "post"){
+    params = new HttpParams({
+      fromObject:{
+        ItemsPerPage : "10",
+        FilterText : "",
+        categoryId : this.userId,
+        Page : Number(pageNo).toString()
+      }
+    });
+  }
+  return params;
 }
 
 // Fetch data from API
 getData(pageNo: any) {
-  debugger;
   this.loading.emit(true);
   this.responseData.emit([]);
   let params = this.handleHttpParams(pageNo);
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${this.accessToken}`
   });
 
   this.currentPageNumber = Number(pageNo);

@@ -81,3 +81,20 @@ body {
     width: 40px;
     height: 40px;
 }
+
+.bg-a {
+    position: relative;
+}
+
+.text-number {
+    display: flex;
+    position: absolute;
+    min-width: 10px;
+    top: -6px;
+    left: 12px;
+    color: red;
+    align-items: center !important;
+    justify-content: center;
+    font-size: 12px !important;
+    margin: 0 auto;
+}

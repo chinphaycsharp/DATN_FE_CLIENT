@@ -6,6 +6,7 @@ export class loginResultModel{
   public expires:string;
   public now : string;
   public privileges : Privilege[];
+  public userId:number;
 }
 
 interface Privilege{

@@ -10,8 +10,10 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+  isLoading = false;
   public model : loginResultModel = null;
   public notification : boolean = true;
+  public notificationRegister : boolean = true;
   public propertiesLogin : any = {
     username:true,
     password:true,
@@ -40,21 +42,30 @@ export class AuthComponent implements OnInit {
   }
 
   async login(username:string, password:string){
+    this.notification= true;
     this.validationFormLogin(username,password);
     if(this.notification){
-      var result = await this.authService.login(username,password);
-      if(result.statusCode == 200){
-        this.model = JSON.parse(result["resultObj"]);
-        console.log(this.model);
-        localStorage.setItem('accessToken', this.model.access_token);
-        localStorage.setItem('expriesDate',this.model.expires);
-        localStorage.setItem('currentDate',this.model.now);
-        localStorage.setItem('privileges',this.model.privileges.toString());
-        localStorage.setItem('isLogin' ,'true');
-        this.router.navigate(['home']);
-      }
-      else {
-        console.log(result["message"]);
+      this.isLoading = true;
+      debugger;
+      this.authService.login(username,password).then(result=>{
+        if(result.statusCode == 200){
+          this.model = JSON.parse(result["resultObj"]);
+          localStorage.setItem('accessToken', this.model.access_token);
+          localStorage.setItem('expriesDate',this.model.expires);
+          localStorage.setItem('currentDate',this.model.now);
+          localStorage.setItem('privileges',this.model.privileges.toString());
+          localStorage.setItem('userId',this.model.userId.toString());
+          localStorage.setItem('isLogin' ,'true');
+          this.isLoading = false;
+          this.router.navigate(['home']);
+        }
+        else {
+          console.log(result["message"]);
+        }
+      });
+      if(this.isLoading){
+        this.isLoading = false;
+        this.router.navigate(['auth']);
       }
     }
     else{
@@ -63,18 +74,20 @@ export class AuthComponent implements OnInit {
   }
 
   async register(name:string,username:string, email : string ,phone : string ,password : string,confirmpass : string){
+    this.notificationRegister= true;
     this.validationFormRegister(name,username,email,phone,password,confirmpass);
-    if(this.notification){
-      debugger;
+    if(this.notificationRegister){
       var roleId = ["8"];
       var model = new registerViewModel(1,1,username,password,confirmpass,1,name,email,phone,roleId);
-      var result = await this.authService.register(model);
-      if(result["body"]["statusCode"] == 201){
-        console.log("Đăng ký thành công hãy đăng nhập ngay");
-        var a = document.querySelector('.cont');
-        a?.classList.toggle('s--signup');
-      }
-      console.log(result);
+      this.isLoading = true;
+      this.authService.register(model).then(result=>{
+        if(result["body"]["statusCode"] == 201){
+          console.log("Đăng ký thành công hãy đăng nhập ngay");
+          var a = document.querySelector('.cont');
+          a?.classList.toggle('s--signup');
+        }
+        console.log(result);
+      });
     }
   }
 
@@ -97,38 +110,39 @@ export class AuthComponent implements OnInit {
     if(name == '')
     {
       this.propertiesRegister['name'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
     if(username == '')
     {
       this.propertiesRegister['username'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
     if(email == '')
     {
       this.propertiesRegister['email'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
     if(phone == '')
     {
       this.propertiesRegister['username'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
     if(password == '')
     {
       this.propertiesRegister['password'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
     if(confirmpass == '')
     {
       this.propertiesRegister['confirmpass'] = false;
-      this.notification = false;
+      this.notificationRegister = false;
     }
 
     //validate pass
     if(password != "" && confirmpass != ""){
       if(password != confirmpass){
         this.pass['confirmpass'] = false;
+        this.notificationRegister = false;
       }
     }
   }

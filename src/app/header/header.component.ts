@@ -1,18 +1,47 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { cartItemViewModel } from '../models/cart/cartItemViewModel';
+import { CartService } from '../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnChanges {
   isLogin :boolean = false;
-  constructor(private router: Router) {
+  length = 0;
+  cartItemViewModels :cartItemViewModel[] = [];
+  constructor(private router: Router,public cartService:CartService) {
     this.isLogin = localStorage.getItem("isLogin") == "true" ? true : false ;
-   }
+  }
 
   ngOnInit(): void {
+    this.loadLengthCart();
+  }
+
+  loadLengthCart(){
+    this.cartService.getProducts()
+    .subscribe(res=>{
+      this.length = 0;
+      console.log(JSON.parse(sessionStorage.getItem("cart_items")));
+      if(JSON.parse(sessionStorage.getItem("cart_items"))){
+        let l = JSON.parse(sessionStorage.getItem("cart_items")).length;
+        let products = JSON.parse(sessionStorage.getItem("cart_items"));
+        if(l > 1){
+          for (let index = 0; index < products.length; index++) {
+              this.length += products[index].amount;
+          }
+        }
+        else{
+          this.length = products[0].amount;
+        }
+      }
+    })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   openModal(){
@@ -36,5 +65,11 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.clear();
     this.router.navigate(['auth']);
+  }
+
+
+  searchProduct(searchStr : string){
+    console.log(searchStr);
+    this.router.navigate(['/search/product',searchStr]);
   }
 }

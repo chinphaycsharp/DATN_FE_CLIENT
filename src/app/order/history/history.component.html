@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row h-100">
             <div class="col-lg-7 mx-auto text-center mb-4">
-                <h5 class="fs-3 fs-lg-5 lh-sm mb-3">Lịch sử mua hàng</h5>
+                <h5 class="fs-3 fs-lg-5 lh-sm mb-3">Danh sách đơn hàng đã mua</h5>
             </div>
             <div class="row h-100">
                 <div class="col-12">
@@ -15,47 +15,29 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Ảnh</th>
-                                            <th scope="col">tên</th>
-                                            <th scope="col">Số lượng</th>
-                                            <th scope="col">Giá</th>
+                                            <th scope="col">Tên</th>
+                                            <th scope="col">Nội dung</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Ngày mua</th>
+                                            <th scope="col">Tổng giá</th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Chi tiết</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let item of students">
                                             <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td><input type="number" class="qty text-center" value="2"></td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td><input type="number" class="qty text-center" value="2"></td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td><input type="number" class="qty text-center" value="2"></td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td><input type="number" class="qty text-center" value="2"></td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td><input type="number" class="qty text-center" value="2"></td>
-                                            <td>@mdo</td>
+                                            <td>{{item.userName}}</td>
+                                            <td>{{item.content}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td>{{item.createDateStr}}</td>
+                                            <td>{{item.totalPrice |currency :"VND"}}</td>
+                                            <td>{{item.status == true ? "Đang giao":"Đang đợi duyệt"}}</td>
+                                            <td><button class="btn" type="button"><svg [routerLink]="['/order/detail']"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
+                                              <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                              <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                              <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                            </svg></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -63,7 +45,8 @@
                         </div>
                     </nav>
                 </div>
-                <app-pagination></app-pagination>
+                <app-pagination (responseData)="students = $event" [userId]="id" [type]="'history'" [accessToken]="accessToken" (loading)="isLoadingStudents = $event" [apiRoute]="'http://localhost:1938/api/order'" [searchTerm]="searchTerm" [reload]="reload" [recordsPerPage]="recordsPerPage">
+                </app-pagination>
             </div>
         </div>
     </div>
